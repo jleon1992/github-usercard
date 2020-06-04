@@ -59,10 +59,11 @@ const followersArray = [];
     </div>
 */
 
+
 function cardMaker(attributes){
   const card = document.createElement('div')
   const image = document.createElement('img')
-  const carInfo = document.createElement('div')
+  const cardInfo = document.createElement('div')
   const name = document.createElement('h3')
   const userName = document.createElement('p')
   const location = document.createElement('p')
@@ -71,6 +72,22 @@ function cardMaker(attributes){
   const followers = document.createElement('p')
   const following = document.createElement('p')
   const bio = document.createElement('p')
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  userName.classList.add('username')
+  card.appendChild(image)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(userName)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  profile.appendChild(url)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+  const {avatar_url, name, login, location, url, followers, following} = attributes
+
 }
 // location
 // url
