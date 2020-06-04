@@ -7,6 +7,8 @@
 axios.get('https://api.github.com/users/jleon1992')
 .then(response => {
   console.log(response)
+  const gitCard = cardMaker(response.data)
+  entryPoint.appendChild(gitCard)
 })
 .catch(error => {
   console.log(error)
@@ -64,7 +66,7 @@ function cardMaker(attributes){
   const card = document.createElement('div')
   const image = document.createElement('img')
   const cardInfo = document.createElement('div')
-  const name = document.createElement('h3')
+  const nameHead = document.createElement('h3')
   const userName = document.createElement('p')
   const location = document.createElement('p')
   const profile = document.createElement('p')
@@ -74,11 +76,11 @@ function cardMaker(attributes){
   const bio = document.createElement('p')
   card.classList.add('card')
   cardInfo.classList.add('card-info')
-  name.classList.add('name')
+  nameHead.classList.add('name')
   userName.classList.add('username')
   card.appendChild(image)
   card.appendChild(cardInfo)
-  cardInfo.appendChild(name)
+  cardInfo.appendChild(nameHead)
   cardInfo.appendChild(userName)
   cardInfo.appendChild(location)
   cardInfo.appendChild(profile)
@@ -86,8 +88,24 @@ function cardMaker(attributes){
   cardInfo.appendChild(followers)
   cardInfo.appendChild(following)
   cardInfo.appendChild(bio)
-  const {avatar_url, name, login, location, url, followers, following} = attributes
-
+  const name = attributes.name
+  const login = attributes.login
+  const follower = attributes.followers
+  const follow = attributes.following
+  const link = attributes.html_url
+  const picture = attributes.avatar_url
+  const place = attributes.location
+  const about = attributes.bio
+  nameHead.textContent = name;
+  image.src = picture
+  userName.textContent = login
+  location.textContent = `Location: ${place}`
+  followers.textContent = `Followers: ${follower}`
+  following.textContent = `Following ${follow}`
+  url.textContent = `Profile: ${link}`
+  bio.textContent = `Bio: ${about}`
+  console.log(card)
+  return card
 }
 // location
 // url
