@@ -16,6 +16,8 @@ axios.get('https://api.github.com/users/jleon1992')
 
 
 
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -115,7 +117,7 @@ const followersArray = ['Afellman', 'CScori', 'timmyomahony', 'KalobTaulien', 't
 followersArray.forEach(element => {
   axios.get(`https://api.github.com/users/${element}`)
 .then(response => {
-  console.log(response)
+  
   const gitCard = cardMaker(response.data)
   entryPoint.appendChild(gitCard)
 })
@@ -123,3 +125,25 @@ followersArray.forEach(element => {
   console.log(error)
 },[])
 });
+
+axios.get('https://api.github.com/users/jleon1992/followers')
+.then(response => {
+  console.log(response.data)
+  const followers = response.data;
+  followers.forEach(element => {
+    console.log(element.login)
+    axios.get(`https://api.github.com/users/${element.login}`)
+    .then(response => {
+      console.log(response)
+      const gitCard = cardMaker(response.data)
+  entryPoint.appendChild(gitCard)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  });
+  // ``
+})
+.catch(error =>{
+  console.log(error)
+})
